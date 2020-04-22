@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"startGo/collection"
 )
 
@@ -34,6 +36,9 @@ func main() {
 	px.n = 100
 	println(&x)
 	println(&px)
+
+	slice()
+	errors()
 
 }
 
@@ -117,4 +122,60 @@ type MyStruct struct {
 func pointer() {
 	p := new(MyStruct)
 	p.n = 100
+}
+
+func slice() {
+	var s []int
+	a := []int{1, 2, 3, 4, 5}
+	// 这样就能复制 a 的元素，但是不好的一点:toString 方法不好，打印的还是地址
+	s = a[:]
+	for i, i2 := range s {
+		println(i, " ", i2)
+	}
+}
+
+// make 也是创建一个新对象的方法，但不同于 new，它是直接返回对象而不是指针
+func makeStatement() {
+	m := make(map[string]int)
+	println(m)
+}
+
+type typeInterface interface {
+	Get() int
+	Set(i int)
+}
+
+type myType struct {
+	i int
+}
+
+func (p *myType) Get() int {
+	return 1
+}
+func (p *myType) Set(i int) {
+
+}
+
+type mySubType struct {
+	// 可以设置匿名字段
+	myType
+	j int
+}
+
+func (p *mySubType) Get() int {
+	// 匿名字段可以直接引用
+	return p.myType.Get()
+}
+
+func errors() {
+	file, err := os.Open("hello.go")
+	if err != nil {
+		log.Fatal(err)
+	}
+	println(file.Name())
+
+
+	// panic
+	arr := []int{1,2,3,4}
+	println(arr[100])
 }

@@ -17,6 +17,7 @@ func main() {
 	ch := make(chan int, 1)
 	for {
 		select {
+		// 这里相当于对 ch 进行操作了，这合适吗？
 		case ch <- 0:
 		case ch <- 1:
 		}

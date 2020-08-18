@@ -21,7 +21,7 @@ func main() {
 }
 
 func getTaks() []Task {
-
+	return nil
 }
 
 func worker(ch chan Task) {

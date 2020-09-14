@@ -89,3 +89,6 @@ fabric.properties
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+.idea/sonarlint/issuestore/1/
+test.txt
+test1.txt

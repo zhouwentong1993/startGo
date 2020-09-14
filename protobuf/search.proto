@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+message SearchResult {
+  string queryResult = 1;
+  uint32 row = 2;
+  uint32 pages = 3;
+  // 重复字段，代表数组结构
+  repeated uint32 rep = 4;
+  map<string, uint32> map = 5;
+  oneof testOneOf {
+    string oneOf1 = 6;
+    int32 oneOf2 = 7;
+  }
+}
+
+message Result {
+  string title = 1;
+  string subTitle = 2;
+  string info = 3;
+}
+
+message SearchResponse {
+  Result result = 1;
+  uint32 pageNum = 2;
+  enum Type {
+    COMMON = 0;
+    WEB = 1;
+    NEWS = 2;
+    NEWS_PAPER = 3;
+  }
+  Type type = 3;
+}
